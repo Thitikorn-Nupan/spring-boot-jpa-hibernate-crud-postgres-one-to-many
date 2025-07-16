@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-
 @Entity
 @Table(name = "subjects")
 public class Subject {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore // @JsonIgnore use to ignore this field for showing the data

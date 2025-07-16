@@ -15,47 +15,58 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/api/subject")
 public class SubjectEndpoint {
-    private SubjectService<Subject> subjectSubjectService;
+
+    private final SubjectService<Subject> subjectSubjectService;
+
     @Autowired
     public SubjectEndpoint(SubjectService<Subject> subjectSubjectService) {
         this.subjectSubjectService = subjectSubjectService;
     }
+
     @PostMapping(value = "/create/{code}")
     private ResponseEntity create(@RequestBody Subject subject , @PathVariable Long code) {
-        return ResponseEntity.ok(CommonsResponseObject
+        return ResponseEntity.ok(
+                CommonsResponseObject
                 .<Subject>builder()
                 .status(CommonsConstants.STATUS_CREATED)
                 .code(CommonsConstants.STRING_CREATED)
                 .info(subjectSubjectService.create(subject,code))
-                .build());
+                .build()
+        );
     }
 
     @GetMapping(value = "/reads/{code}")
     private ResponseEntity reads(@PathVariable Long code) {
-        return ResponseEntity.ok(CommonsResponseObject
+        return ResponseEntity.ok(
+                CommonsResponseObject
                 .<List<Subject>>builder()
                 .status(CommonsConstants.STATUS_ACCEPTED)
                 .code(CommonsConstants.STRING_ACCEPTED)
                 .info(subjectSubjectService.reads(code))
-                .build());
+                .build()
+        );
     }
 
     @PutMapping(value = "/update/{code}/{no}")
     private ResponseEntity update(@PathVariable Long code , @PathVariable Long no , @RequestBody Subject subject) {
-        return ResponseEntity.ok(CommonsResponseObject
+        return ResponseEntity.ok(
+                CommonsResponseObject
                 .<Map<String,Subject>>builder()
                 .status(CommonsConstants.STATUS_ACCEPTED)
                 .code(CommonsConstants.STRING_ACCEPTED)
                 .info(subjectSubjectService.update(subject,no,code))
-                .build());
+                .build()
+        );
     }
     @DeleteMapping(value = "/delete/{code}/{no}")
     private ResponseEntity delete(@PathVariable Long code , @PathVariable Long no ) {
-        return ResponseEntity.ok(CommonsResponseObject
+        return ResponseEntity.ok(
+                CommonsResponseObject
                 .<Map<String,Subject>>builder()
                 .status(CommonsConstants.STATUS_ACCEPTED)
                 .code(CommonsConstants.STRING_ACCEPTED)
                 .info(subjectSubjectService.delete(no,code))
-                .build());
+                .build()
+        );
     }
 }

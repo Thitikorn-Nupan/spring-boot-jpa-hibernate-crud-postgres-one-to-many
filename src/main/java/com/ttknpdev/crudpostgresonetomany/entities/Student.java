@@ -7,15 +7,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.List;
 
 @Data
 @NoArgsConstructor
-
 @Entity
 @Table(name = "students")
 public class Student {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long code;
@@ -35,8 +34,7 @@ public class Student {
     private Short age;
     @NotNull
     private Boolean status;
-    /* One to Manny */
-    @OneToMany(cascade = CascadeType.ALL,targetEntity = Subject.class)
+    @OneToMany(cascade = CascadeType.ALL,targetEntity = Subject.class) /// One to Manny
     @JoinColumn(name = "st_code" , referencedColumnName = "code")
     private List<Subject> subjects;
 

@@ -10,6 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 public interface SubjectRepository extends CrudRepository<Subject , Long> {
+
+    // *** @Transactional works for update database
+
     @Modifying
     @Transactional
     @Query(value = "delete from subjects where st_code = :code",nativeQuery = true)

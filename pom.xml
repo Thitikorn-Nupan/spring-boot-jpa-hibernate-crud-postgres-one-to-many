@@ -17,6 +17,7 @@
         <java.version>17</java.version>
     </properties>
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -25,15 +26,16 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <!-- Why i have import again ??? -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <scope>provided</scope>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -54,6 +56,32 @@
 
     <build>
         <plugins>
+
+            <!-- **** importance for build jar with multiple modules -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>3.1.2</version>
+                <executions>
+
+                    <execution>
+                        <id>commons-response-ttknpdev</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>com.ttknpdev</groupId>
+                            <artifactId>commons-response-ttknpdev</artifactId>
+                            <version>0.0.1-SNAPSHOT</version>
+                            <packaging>jar</packaging>
+                            <file>${basedir}/libs/commons-response-ttknpdev-0.0.1-SNAPSHOT.jar</file>
+                        </configuration>
+                    </execution>
+
+
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
